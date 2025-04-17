@@ -1,0 +1,9 @@
+.table-header {
+    padding: .5rem;
+    border: solid black 1px;
+}
+
+td {
+    padding: .25rem;
+    border: solid black 1px
+}
