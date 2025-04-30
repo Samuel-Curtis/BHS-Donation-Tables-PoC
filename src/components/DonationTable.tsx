@@ -15,14 +15,14 @@ function DonationTable(props: TableData) {
 
     const rows: JSX.Element[] = props.rowData.map(row => {
         if (props.headers.length > 3) {
-            return <tr className="row">
+            return <tr className="row" key={row.description}>
                         <td>{row.description}</td>
                         <td>{row.investment}</td>
                         <td>{row.quantity}</td>
                         <td>{row.investor}</td>
                     </tr>
         } else {
-            return <tr className="row">
+            return <tr className="row" key={row.description}>
                         <td>{row.description}</td>
                         <td>{row.investment}</td>
                         <td>{row.investor}</td>
@@ -31,15 +31,20 @@ function DonationTable(props: TableData) {
     });
 
     return(
-        <>
         <table className="donation-table">
-            <tr className="table-header-group">
-                { headers }
-            </tr>
+            <thead className="table-header-group">
+                <tr>
+                    { headers }
+                </tr>
+            </thead>
 
-            { rows }
+            <tbody className="table-rows">
+                { rows }
+                { rows }
+                { rows }
+                { rows }
+            </tbody>
         </table>
-        </>
     )
 }
 

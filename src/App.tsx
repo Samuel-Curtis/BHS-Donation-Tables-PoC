@@ -2,6 +2,7 @@ import { useState } from 'react'
 import './App.css'
 import DonationTable from './components/DonationTable'
 import { buildingTableData, furnishingsTableData, equipmentTableData, appliancesTableData } from './data/TableData'
+import { TableData } from './models/TableDataModels';
 
 function App() {
   /*
@@ -12,26 +13,55 @@ function App() {
   'setSelectedTableData' is used to update the 'selectedTableData' State Variable
 
   */
-  const [selectedTableData, setSelectedTableData] = useState(buildingTableData)
+  const [selectedTableData, setSelectedTableData] = useState(buildingTableData);
+
+  // State to track the active button - default to 'Building'
+  const [activeButton, setActiveButton] = useState('Building');
+
+  // Button onClick handler
+  function handleButtonClick(buttonCategory: string, tableData: TableData) {
+    setActiveButton(buttonCategory);
+    setSelectedTableData(tableData);
+  }
 
 
   return (
     <>
-      <div>
-        <h2>Donation Table</h2>
-      </div>
+  
+      <h2 className='table-title'>Donation Options</h2>
       
       <div className="table-buttons">
-        <button onClick={() => setSelectedTableData(buildingTableData)}>Building</button>
-        <button onClick={() => setSelectedTableData(furnishingsTableData)}>Furnishings</button>
-        <button onClick={() => setSelectedTableData(appliancesTableData)}>Appliances</button>
-        <button onClick={() => setSelectedTableData(equipmentTableData)}>Equipment</button>
+        <button 
+          className={activeButton === 'Building' ? 'active' : ''}
+          onClick={() => handleButtonClick('Building', buildingTableData)}>
+          Building
+        </button>
+        
+        <button 
+          className={activeButton === 'Furnishings' ? 'active' : ''}
+          onClick={() => handleButtonClick('Furnishings', furnishingsTableData)}>
+          Furnishings
+        </button>
+        
+        <button 
+          className={activeButton === 'Appliances' ? 'active' : ''}
+          onClick={() => handleButtonClick('Appliances', appliancesTableData)}>
+          Appliances
+        </button>
+        
+        <button
+          className={activeButton === 'Equipment' ? 'active' : ''}
+          onClick={() => handleButtonClick('Equipment', equipmentTableData)}>
+          Equipment
+        </button>
       </div>
 
-      <DonationTable 
-        headers={ selectedTableData.headers } 
-        rowData={ selectedTableData.rowData } 
-      />
+      <div className="table-wrapper">
+        <DonationTable 
+          headers={ selectedTableData.headers } 
+          rowData={ selectedTableData.rowData } 
+        />
+      </div>
 
     </>
   )

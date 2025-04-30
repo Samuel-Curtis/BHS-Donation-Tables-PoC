@@ -1,9 +1,31 @@
 .table-header {
-    padding: .5rem;
+    padding: .75rem;
     border: solid black 1px;
+    background-color: black;
+    color: white;
+    font-size: 18px;
 }
 
 td {
-    padding: .25rem;
-    border: solid black 1px
+    padding: .5rem;
+    /* border-top: solid black 1px;
+    border-bottom: solid black 1px; */
+}
+
+.row {
+    border-top: solid black 2px;
+    border-bottom: solid black 2px;
+}
+
+.donation-table {
+    width: 100%;
+    overflow-y: scroll;
+    border-collapse: collapse;
+}
+
+
+/* Apply background to every other table row, starting with the first */
+.row:nth-child(2n - 1) {
+    background-color: rgba(168,33,15, .75)
+    
 }
